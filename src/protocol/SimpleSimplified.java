@@ -31,7 +31,6 @@ public class SimpleSimplified implements IMACProtocol {
             }
         }
 
-
         if (previousMediumState == MediumState.Idle){
             if(new Random().nextInt(100) < 25){
                 return new TransmissionInfo(TransmissionType.NoData, new Random().nextInt(4));
@@ -66,7 +65,7 @@ public class SimpleSimplified implements IMACProtocol {
             if(skipNext != 0){
                 skipNext -= 1;
                 //System.out.println("Skipped next");
-                return new TransmissionInfo(TransmissionType.Data, (controlInformation+2)%4+8);
+                return new TransmissionInfo(TransmissionType.Data, (controlInformation+2)%4);
 
             } else {
                 return new TransmissionInfo(TransmissionType.Data, (controlInformation + 1)%4);
