@@ -14,14 +14,14 @@ import client.*;
 public class Program implements Runnable {
 
 	// Change to your group number (use a student number)
-	private static int groupId = 0;
+	private static int groupId = 1542648;
 
 	// Change to your group password (doesn't matter what it is,
 	// as long as everyone in the group uses the same string)
-	private static String password = "changeme";
+	private static String password = "pizzakoekjes";
 
 	// Change to your protocol implementation
-	private static IMACProtocol protocol = new SlottedAlohaSimplified();
+	private static IMACProtocol protocol = new SimpleSimplified();//new SlottedAlohaSimplified();
 
 	// Challenge server address
 	private static String serverAddress = "netsys.student.utwente.nl";
