@@ -10,8 +10,9 @@ import java.util.Random;
  * @version 05-12-2013
  */
 public class SimpleSimplified implements IMACProtocol {
-    public static final int SKIP_COUNT = 10;
+    public static final int SKIP_COUNT = 14;
 
+    int[] skipList = new int[4];
     boolean tried = true;
     private int number = -1;
     private int skipNext = 0;
@@ -49,27 +50,23 @@ public class SimpleSimplified implements IMACProtocol {
             }
 		}
 
-        if ((number+2)%4 == (controlInformation)%4){
-            //System.out.println(controlInformation/4 );
-            //System.out.println(controlInformation);
-
-            if(controlInformation/4 == 1) {
-                skipNext = SKIP_COUNT;
-                //System.out.println("Skip next");
-            }
+        if(controlInformation/4 == 1) {
+            skipList[controlInformation%4] = SKIP_COUNT;
+            //System.out.println("Skip next");
         }
 		// Randomly transmit with 60% probability nee
 		if (controlInformation%4 == number) {
             //System.out.println("Sent Data");
             tried = true;
-            if(skipNext != 0){
-                skipNext -= 1;
-                //System.out.println("Skipped next");
-                return new TransmissionInfo(TransmissionType.Data, (controlInformation+2)%4);
-
-            } else {
-                return new TransmissionInfo(TransmissionType.Data, (controlInformation + 1)%4);
+            int n = 1;
+            while(skipList[(number + n + 1)%4] != 0 && n != 4){
+                skipList[(number + n)%4] -= 1;
+                n += 1;
             }
+            skipList[(number+n)%4] -= 1;
+            //System.out.println("Skipped next");
+            return new TransmissionInfo(TransmissionType.Data, (controlInformation+n)%4);
+
 		} else {
             tried = false;
 			return new TransmissionInfo(TransmissionType.Silent, (controlInformation + 1)%4);
