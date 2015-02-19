@@ -10,7 +10,7 @@ import java.util.Random;
  * @version 05-12-2013
  */
 public class SimpleSimplified implements IMACProtocol {
-    public static final int SKIP_COUNT = 3;
+    public static final int SKIP_COUNT = 10;
 
     boolean tried = true;
     private int number = -1;
@@ -50,7 +50,7 @@ public class SimpleSimplified implements IMACProtocol {
             }
 		}
 
-        if ((number+1)%4 == (controlInformation)%4){
+        if ((number+2)%4 == (controlInformation)%4){
             //System.out.println(controlInformation/4 );
             //System.out.println(controlInformation);
 
